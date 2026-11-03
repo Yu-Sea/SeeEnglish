@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#edf5fd" />
+    <meta
+      name="description"
+      content="SeeEnglish 见词 —— 一本不会催你的英语笔记。没有每日任务和进度压力，你学到什么就记什么，记了什么就复习什么。所有词、句子和联想，留在自己的本地语言索引里。"
+    />
+    <meta property="og:title" content="SeeEnglish · 见词 — 一本不会催你的英语笔记" />
+    <meta
+      property="og:description"
+      content="不是又一个背单词软件。是一本会自己生长的英语笔记。本地优先，没有每日任务，没有标准答案。"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="stylesheet" href="./base.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./site-v2.css" />
+    <link rel="stylesheet" href="./official.css" />
+    <title>SeeEnglish · 见词 — 一本不会催你的英语笔记</title>
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </symbol>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </symbol>
+      <symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+        <polyline points="5 13 12 20 19 13"></polyline>
+      </symbol>
+      <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="7" y1="17" x2="17" y2="7"></line>
+        <polyline points="7 7 17 7 17 17"></polyline>
+      </symbol>
+      <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.9-.39.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.73.81 1.17 1.83 1.17 3.09 0 4.41-2.69 5.39-5.25 5.67.41.35.77 1.04.77 2.11 0 1.52-.01 2.75-.01 3.13 0 .31.21.67.8.56C20.22 21.38 23.5 17.07 23.5 12 23.5 5.73 18.27.5 12 .5z"></path>
+      </symbol>
+      <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10.5 12 3l9 7.5"></path>
+        <path d="M5 9.5V21h14V9.5"></path>
+        <path d="M9.5 21v-7h5v7"></path>
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <polygon points="10 8.5 16 12 10 15.5 10 8.5"></polygon>
+      </symbol>
+      <symbol id="i-library" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5V4.5"></path>
+        <path d="M4 19.5h16"></path>
+        <path d="M8 16V9"></path>
+        <path d="M12 16V6"></path>
+        <path d="M16 16v-5"></path>
+        <path d="M20 16V8"></path>
+      </symbol>
+      <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="12" height="12" rx="2"></rect>
+        <path d="M5 15V5a2 2 0 0 1 2-2h10"></path>
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </symbol>
+      <symbol id="i-quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 11H6a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v7c0 3-2 4.5-4 5"></path>
+        <path d="M19 11h-4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v7c0 3-2 4.5-4 5"></path>
+      </symbol>
+      <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </symbol>
+      <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v3"></path>
+        <path d="M12 18v3"></path>
+        <path d="M3 12h3"></path>
+        <path d="M18 12h3"></path>
+        <path d="m5.6 5.6 2.1 2.1"></path>
+        <path d="m16.3 16.3 2.1 2.1"></path>
+        <path d="m18.4 5.6-2.1 2.1"></path>
+        <path d="m7.7 16.3-2.1 2.1"></path>
+      </symbol>
+      <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="5" rx="8" ry="3"></ellipse>
+        <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"></path>
+        <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"></path>
+      </symbol>
+      <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+      </symbol>
+      <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4.5 21c.7-4.2 3.3-6.5 7.5-6.5s6.8 2.3 7.5 6.5"></path>
+      </symbol>
+      <symbol id="i-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="5" rx="1"></rect>
+        <path d="M5 9v11h14V9"></path>
+        <path d="M10 13h4"></path>
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v12"></path>
+        <polyline points="6 10 12 16 18 10"></polyline>
+        <path d="M4 20h16"></path>
+      </symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 20V4"></path>
+        <path d="M4 20h16"></path>
+        <polyline points="7 16 11 11 14 14 20 5"></polyline>
+      </symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m4 20 4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z"></path>
+        <path d="m13 6 5 5"></path>
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3 5 6v6c0 4.2 2.7 7.4 7 9 4.3-1.6 7-4.8 7-9V6z"></path>
+        <polyline points="9 12 11 14 15 10"></polyline>
+      </symbol>
+      <symbol id="i-fingerprint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"></path>
+        <path d="M14 13.12c0 2.38 0 6.38-1 8.88"></path>
+        <path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"></path>
+        <path d="M2 12a10 10 0 0 1 18-6"></path>
+        <path d="M2 16h.01"></path>
+        <path d="M21.8 16c.2-2 .131-4.02-.8-6"></path>
+        <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"></path>
+        <path d="M8.65 22c.21-.66.45-1.32.57-2"></path>
+        <path d="M9 6.8a6 6 0 0 1 9 5.2v2"></path>
+      </symbol>
+    </svg>
+
+    <div class="backdrop" aria-hidden="true">
+      <div class="backdrop__base"></div>
+      <div class="backdrop__wash backdrop__wash--one"></div>
+      <div class="backdrop__wash backdrop__wash--two"></div>
+      <div class="backdrop__wash backdrop__wash--three"></div>
+      <div class="backdrop__dots"></div>
+      <div class="backdrop__orb"></div>
+      <div class="floaters">
+        <div class="floater floater--word" style="left: 4.5%; top: 22%; --delay: -2s; --duration: 17s; --rotate: -6deg">
+          <span class="floater__word">serendipity</span>
+          <span class="floater__detail">/ˌserənˈdɪpəti/</span>
+        </div>
+        <div class="floater floater--glyph" style="left: 89%; top: 27%; --delay: -7s; --duration: 19s; --rotate: 7deg">
+          <span class="floater__word">Aa</span>
+        </div>
+        <div class="floater floater--ring" style="left: 10%; top: 66%; --delay: -4s; --duration: 21s; --rotate: 0deg">
+          <span class="floater__ring"></span>
+        </div>
+        <div class="floater floater--word" style="left: 84%; top: 62%; --delay: -9s; --duration: 18s; --rotate: 5deg">
+          <span class="floater__word">ephemeral</span>
+          <span class="floater__detail">短暂的</span>
+        </div>
+        <div class="floater floater--index" style="left: 17%; top: 42%; --delay: -5s; --duration: 23s; --rotate: -3deg">
+          <span class="floater__index">01</span>
+          <span class="floater__detail">WORD</span>
+        </div>
+        <div class="floater floater--quote" style="left: 78%; top: 42%; --delay: -11s; --duration: 20s; --rotate: 4deg">
+          <span class="floater__word">“word”</span>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header" id="site-header">
+      <a class="brand" href="#intro" aria-label="SeeEnglish 首页">
+        <span class="brand__mark">
+          <span class="brand__letter">S</span>
+          <span class="brand__dot"></span>
+        </span>
+        <span class="brand__copy">
+          <span class="brand__name">SeeEnglish</span>
+          <span class="brand__cn">见词 · 语言索引</span>
+        </span>
+      </a>
+      <div class="site-header__right">
+        <nav class="official-nav" aria-label="主导航">
+          <a class="is-active" href="#intro">介绍</a>
+          <a href="./download.html">下载</a>
+          <a href="./docs.html">文档</a>
+        </nav>
+        <a class="official-github" href="https://github.com/Yu-Sea" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg>
+          <span>GitHub</span>
+          <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg>
+        </a>
+      </div>
+    </header>
+
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <main class="site-main">
+      <section class="site-section site-intro" id="intro" data-section="intro">
+        <div class="intro-inner">
+          <div class="section-kicker reveal">00 / SEEENGLISH</div>
+          <div class="intro-mark reveal">
+            <span class="intro-mark__box"><span>S</span><i></i></span>
+            <span class="intro-mark__name">SeeEnglish <em>见词</em></span>
+          </div>
+          <h1 class="intro-title reveal">
+            把遇见的词，<br />
+            <em>留成自己的语言索引。</em>
+          </h1>
+          <p class="intro-copy reveal">
+            一本不会催你的英语笔记。没有每日任务，没有标准答案；你学到什么，就记什么，记了什么，就复习什么。
+          </p>
+          <div class="intro-actions reveal">
+            <a class="button button--primary intro-download" href="./download.html">
+              <svg class="icon icon--small" aria-hidden="true"><use href="#i-download"></use></svg>
+              下载 Windows 版
+              <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            </a>
+            <a class="button button--ghost" href="./docs.html">
+              查看使用文档
+              <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg>
+            </a>
+          </div>
+          <div class="intro-meta reveal">
+            <span><i></i> 当前版本 v0.6.0</span>
+            <span>Windows 10 / 11</span>
+            <span>本地优先 · 无需登录</span>
+          </div>
+          <a class="scroll-cue" href="#home" aria-label="继续了解 SeeEnglish">
+            <span>往下看</span>
+            <span class="scroll-cue__line"></span>
+            <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-down"></use></svg>
+          </a>
+        </div>
+      </section>
+
+      <section class="site-section site-home" id="home" data-section="home">
+        <div class="home-inner">
+          <div class="eyebrow site-eyebrow reveal">
+            <span class="eyebrow__line"></span>
+            01 / A NEW KIND OF ENGLISH NOTEBOOK · 见词
+          </div>
+          <h1 class="home-title reveal">
+            一本不会催你的<br />
+            英语笔记<span class="accent">。</span>
+          </h1>
+          <p class="home-copy reveal">
+            SeeEnglish 不替你安排今天该学什么。你学到什么，就记什么；记了什么，就复习什么。<br class="desktop-only" />
+            把学过的、用过的、联想过的一切，留在自己的语言索引里。
+          </p>
+
+          <form class="home-search reveal" id="home-search" action="#experience" role="search">
+            <div class="search-field">
+              <svg class="search-field__icon icon" aria-hidden="true"><use href="#i-search"></use></svg>
+              <input
+                id="home-query"
+                type="text"
+                placeholder="输入一个词，开始你自己的索引…"
+                aria-label="输入一个英语单词"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+              />
+              <kbd class="search-field__kbd">/</kbd>
+            </div>
+            <button class="capture-button" type="submit">
+              <span>试一下</span>
+              <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            </button>
+          </form>
+
+          <div class="try-row reveal">
+            <span class="try-row__label">试试</span>
+            <button type="button" class="try-chip" data-try="apples">apples</button>
+            <button type="button" class="try-chip" data-try="runs">runs</button>
+            <button type="button" class="try-chip" data-try="studied">studied</button>
+            <button type="button" class="try-chip" data-try="serendipity">serendipity</button>
+            <span class="try-row__hint">词形会被自动识别</span>
+          </div>
+
+          <div class="home-facets reveal" aria-label="产品特点">
+            <div class="home-facet">
+              <span>01</span>
+              <p>没有每日任务</p>
+              <small>不催你，也不制造进度压力</small>
+            </div>
+            <div class="home-facet">
+              <span>02</span>
+              <p>没有标准答案</p>
+              <small>你学到什么，就记什么</small>
+            </div>
+            <div class="home-facet">
+              <span>03</span>
+              <p>只有可见的变化</p>
+              <small>每个词库一个总分，记录自己的节奏</small>
+            </div>
+          </div>
+
+          <a class="scroll-cue" href="#thesis" aria-label="继续了解 SeeEnglish">
+            <span>继续</span>
+            <span class="scroll-cue__line"></span>
+            <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-down"></use></svg>
+          </a>
+        </div>
+      </section>
+
+      <section class="site-section site-thesis" id="thesis" data-section="home">
+        <div class="section-shell">
+          <div class="thesis-kicker reveal">
+            <span class="section-kicker">02 / THE THESIS</span>
+            <span class="thesis-kicker__line"></span>
+            <span>WHY ANOTHER NOTEBOOK?</span>
+          </div>
+          <h2 class="thesis-title reveal">
+            不是又一个背单词软件。<br />
+            <em>是一本会自己生长的英语笔记。</em>
+          </h2>
+          <div class="thesis-copy reveal">
+            <p>
+              大多数英语工具在教你“应该学什么”。SeeEnglish 更想知道：<strong>你今天遇到了什么？</strong>
+              一个词、一句话、一个当时没看懂的表达，都可以成为索引的起点。
+            </p>
+            <p>
+              它不会用红点、倒计时、连续打卡来推动你。没有每日目标，也没有替你判断“这个词重要不重要”。
+              你记下的，就是重要的；你复习的，就是你自己选择要留下的。
+            </p>
+          </div>
+          <div class="thesis-principles">
+            <article class="thesis-principle reveal">
+              <span class="thesis-principle__num">01</span>
+              <span class="thesis-principle__en">NO PRESSURE</span>
+              <h3>不催促</h3>
+              <p>没有每日任务和进度焦虑。想记的时候打开，想不起来的时候离开，学习不该被软件追着跑。</p>
+            </article>
+            <article class="thesis-principle reveal">
+              <span class="thesis-principle__num">02</span>
+              <span class="thesis-principle__en">YOUR STANDARD</span>
+              <h3>不格式化</h3>
+              <p>不强制按词表的结构记录。一个中文释义、一句原句、一段联想，甚至一个画面，都可以。</p>
+            </article>
+            <article class="thesis-principle reveal">
+              <span class="thesis-principle__num">03</span>
+              <span class="thesis-principle__en">VISIBLE CHANGE</span>
+              <h3>只记录变化</h3>
+              <p>每 5 次复习结算一次，给一个安静但真实的总分。看见自己在变，而不是被比较。</p>
+            </article>
+          </div>
+          <blockquote class="thesis-quote reveal">
+            “你学到什么，就记什么。<br />
+            记了什么，就复习什么。”
+          </blockquote>
+        </div>
+      </section>
+
+      <section class="site-section site-experience" id="experience" data-section="experience">
+        <div class="section-shell">
+          <header class="section-head reveal">
+            <div class="section-kicker">03 / HANDS-ON</div>
+            <div class="section-head__row">
+              <h2 class="section-title">
+                先感受一下它的节奏。<br />
+                <em>没有开始按钮，也没有今日任务。</em>
+              </h2>
+              <p class="section-copy">
+                下面是可以真实操作的界面演示。词形匹配、补充或新建、例句、关联、联想，都在浏览器里完成；
+                不需要账号，也不会向任何服务器发送数据。刷新页面即重置。
+              </p>
+            </div>
+          </header>
+
+          <div class="demo-layout">
+            <div class="demo-shell reveal">
+              <div class="demo-chrome">
+                <span class="demo-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="demo-chrome__title">SEEENGLISH / CAPTURE DEMO</span>
+                <span class="demo-live"><i></i>STATIC</span>
+              </div>
+              <div class="demo-body">
+                <div class="add-page is-idle demo-page" id="demo-page">
+                  <div class="search-zone">
+                    <form class="search-bar" id="demo-form" role="search">
+                      <div class="search-field">
+                        <svg class="search-field__icon icon" aria-hidden="true"><use href="#i-search"></use></svg>
+                        <input
+                          id="demo-query"
+                          type="text"
+                          placeholder="输入一个单词，建立你的索引…"
+                          aria-label="演示：输入英语单词"
+                          autocomplete="off"
+                          autocapitalize="off"
+                          spellcheck="false"
+                        />
+                        <kbd class="search-field__kbd">/</kbd>
+                        <div class="search-field__loading" id="demo-loading" hidden>
+                          <span></span><span></span><span></span>
+                        </div>
+                        <button class="search-field__clear" id="demo-clear" type="button" hidden aria-label="清空输入">
+                          <svg class="icon icon--tiny" aria-hidden="true"><use href="#i-x"></use></svg>
+                        </button>
+                      </div>
+                      <button class="capture-button" id="demo-submit" type="submit" disabled>
+                        <svg class="icon icon--small" aria-hidden="true"><use href="#i-plus"></use></svg>
+                        <span>记词</span>
+                      </button>
+                    </form>
+                    <div id="demo-match" aria-live="polite"></div>
+                    <p class="search-caption" id="demo-caption">
+                      支持复数、过去式与不规则形态 · 按 <kbd>Tab</kbd> 取第一个候选
+                    </p>
+                  </div>
+                  <div class="demo-quick" id="demo-quick">
+                    <span>词库里已经有</span>
+                    <button type="button" data-demo-try="apple">apple</button>
+                    <button type="button" data-demo-try="study">study</button>
+                    <button type="button" data-demo-try="run">run</button>
+                    <button type="button" data-demo-try="serendipity">serendipity</button>
+                    <button type="button" data-demo-try="ephemeral">ephemeral</button>
+                  </div>
+                  <div id="demo-composer"></div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="demo-side">
+              <article class="demo-note reveal">
+                <span class="demo-note__index">01</span>
+                <div>
+                  <h3>从你遇到的那个词开始</h3>
+                  <p>输入 <code>apples</code>，它会认出已存在的 <code>apple</code>，而不是再建一个孤立的索引。</p>
+                </div>
+              </article>
+              <article class="demo-note reveal">
+                <span class="demo-note__index">02</span>
+                <div>
+                  <h3>完全匹配，就变成补充</h3>
+                  <p>已收录的词不会重复创建。按钮会从「记词」变成「补充」，继续累积语境。</p>
+                </div>
+              </article>
+              <article class="demo-note reveal">
+                <span class="demo-note__index">03</span>
+                <div>
+                  <h3>笔记没有固定格式</h3>
+                  <p>一句原句、一段中文联想、几个关联词，都由你决定。SeeEnglish 只负责把它们放在一起。</p>
+                </div>
+              </article>
+              <div class="demo-keyboard reveal">
+                <kbd>Tab</kbd>
+                <span>取第一个相关形态到输入框</span>
+              </div>
+            </aside>
+          </div>
+
+          <div class="experience-divider reveal">
+            <span>THEN / RECALL</span>
+            <span class="experience-divider__line"></span>
+            <span>换一种方式遇见同一个词</span>
+          </div>
+
+          <div class="review-demo">
+            <div class="rd-card glass reveal" id="rd-card">
+              <div class="rd-card__top">
+                <span>REVIEW / 45</span>
+                <span class="rd-chip" id="rd-block-chip">本档 4 / 5</span>
+              </div>
+              <div class="rd-word" id="rd-word">serendipity</div>
+              <p class="rd-pron">/ˌserənˈdɪpəti/ · noun</p>
+
+              <div class="rd-stage" id="rd-prompt">
+                <p class="rd-label">先不查答案。写下你记得的意思。</p>
+                <textarea
+                  id="rd-input"
+                  rows="3"
+                  maxlength="220"
+                  placeholder="中文、英文解释，或一个你记得的画面…"
+                  aria-label="写下你记得的意思"
+                ></textarea>
+                <div class="rd-hint">
+                  <span>没有标准答案。写下你此刻想到的。</span>
+                  <button class="button button--primary" id="rd-reveal" type="button">
+                    翻开记录
+                    <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rd-stage" id="rd-record" hidden>
+                <div class="rd-note">
+                  <span class="rd-label">你的记录</span>
+                  <p>意外的发现；在无意中遇到美好事物的运气。</p>
+                </div>
+                <div class="rd-sentence">
+                  <svg class="icon icon--small" aria-hidden="true"><use href="#i-quote"></use></svg>
+                  <span>We met by pure serendipity.</span>
+                </div>
+                <div class="rd-answer">
+                  <span class="rd-label">你写下的</span>
+                  <p id="rd-answer-text">—</p>
+                </div>
+                <p class="rd-label rd-label--question">这一次，你觉得自己想起来了吗？</p>
+                <div class="rd-assess">
+                  <button class="rd-assess__button" id="rd-wrong" type="button">
+                    <span>还没有</span>
+                    <small>再看一遍</small>
+                  </button>
+                  <button class="rd-assess__button rd-assess__button--correct" id="rd-correct" type="button">
+                    <span>想起来了</span>
+                    <small>算这一次正确</small>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rd-stage rd-result" id="rd-result" hidden>
+                <div class="rd-result__icon">
+                  <svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>
+                </div>
+                <span class="section-kicker">BLOCK SETTLED</span>
+                <h3>这一档完成了。</h3>
+                <p class="rd-result__copy">5 次见面为一档。分数已经安静地加入当前词库总分。</p>
+                <div class="rd-result__delta" id="rd-delta">+0.010</div>
+                <div class="rd-result__rows">
+                  <div><span>这一档</span><b id="rd-result-accuracy">5 / 5</b></div>
+                  <div><span>这个词的贡献</span><b id="rd-result-contribution">0.050</b></div>
+                  <div><span>新的总分</span><b id="rd-result-score">42.690</b></div>
+                </div>
+                <button class="button button--primary" id="rd-next" type="button">
+                  再遇一次
+                  <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                </button>
+              </div>
+            </div>
+
+            <aside class="rd-side">
+              <div class="rd-score glass reveal">
+                <div class="rd-score__top">
+                  <span class="section-kicker">LIBRARY SCORE</span>
+                  <span class="rd-score__level">有了轮廓</span>
+                </div>
+                <strong class="rd-score__number" id="rd-score">42.680</strong>
+                <div class="rd-score__scale">
+                  <span>0</span>
+                  <span>100 · CET-4</span>
+                </div>
+                <div class="rd-score__track"><span id="rd-score-fill"></span></div>
+                <div class="rd-score__metrics">
+                  <div><span>本档</span><b id="rd-meetings">4 / 5</b></div>
+                  <div><span>贡献</span><b id="rd-contribution">0.040</b></div>
+                  <div><span>见面</span><b id="rd-meetings-total">44</b></div>
+                </div>
+                <div class="rd-score__dots" id="rd-dots" aria-label="本档进度">
+                  <i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i></i>
+                </div>
+                <p class="rd-score__note">不是每日进度。只是一个词，正在慢慢属于你。</p>
+              </div>
+
+              <article class="rd-explainer glass reveal">
+                <div class="section-kicker">HOW IT SETTLES</div>
+                <h3>为什么每 5 次才结算？</h3>
+                <p>
+                  一次正确或错误，不该决定一个词的价值。5 次为一档，把短期波动抹平，只看这一档里你想起了几次。
+                </p>
+                <div class="rd-delta-list">
+                  <div><span>5 / 5</span><b>+0.010</b></div>
+                  <div><span>4 / 5</span><b>+0.006</b></div>
+                  <div><span>3 / 5</span><b>+0.002</b></div>
+                  <div><span>2 / 5</span><b>−0.002</b></div>
+                  <div><span>1 / 5</span><b>−0.004</b></div>
+                  <div><span>0 / 5</span><b>−0.006</b></div>
+                </div>
+                <p class="rd-explainer__foot">满分 100 ≈ CET-4 水平 · 每个词最多贡献 0.05 分</p>
+              </article>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-section site-features" id="features" data-section="features">
+        <div class="section-shell">
+          <header class="section-head reveal">
+            <div class="section-kicker">04 / THE SYSTEM</div>
+            <div class="section-head__row">
+              <h2 class="section-title">
+                四个动作，<br />
+                <em>构成一套自己的学习方法。</em>
+              </h2>
+              <p class="section-copy">
+                记词、复习、词库、个人中心不是四个孤立的功能，而是一条完整的路径：
+                把遇见的东西留下，再按自己的节奏想起来。
+              </p>
+            </div>
+          </header>
+
+          <div class="feature-map">
+            <a class="feature-map__card glass reveal" href="#capture">
+              <span class="feature-map__num">01</span>
+              <span class="feature-map__icon"><svg class="icon"><use href="#i-pen"></use></svg></span>
+              <h3>记词</h3>
+              <p>从遇到的词开始。词形自动匹配，补充或新建由你决定。</p>
+              <span class="feature-map__link">CAPTURE <svg class="icon icon--tiny"><use href="#i-arrow-right"></use></svg></span>
+            </a>
+            <a class="feature-map__card glass reveal" href="#recall">
+              <span class="feature-map__num">02</span>
+              <span class="feature-map__icon"><svg class="icon"><use href="#i-spark"></use></svg></span>
+              <h3>复习</h3>
+              <p>没有每日任务。想复习时，随机遇见一个词，自己判断想没想起来。</p>
+              <span class="feature-map__link">RECALL <svg class="icon icon--tiny"><use href="#i-arrow-right"></use></svg></span>
+            </a>
+            <a class="feature-map__card glass reveal" href="#library">
+              <span class="feature-map__num">03</span>
+              <span class="feature-map__icon"><svg class="icon"><use href="#i-library"></use></svg></span>
+              <h3>词库</h3>
+              <p>按 A–Z 分组浏览，整理多个独立词库，也能随时导出或合并备份。</p>
+              <span class="feature-map__link">LIBRARY <svg class="icon icon--tiny"><use href="#i-arrow-right"></use></svg></span>
+            </a>
+            <a class="feature-map__card glass reveal" href="#profile">
+              <span class="feature-map__num">04</span>
+              <span class="feature-map__icon"><svg class="icon"><use href="#i-user"></use></svg></span>
+              <h3>个人</h3>
+              <p>头像、名字、签名、学习进度和最近 30 天的分数变化。</p>
+              <span class="feature-map__link">PROFILE <svg class="icon icon--tiny"><use href="#i-arrow-right"></use></svg></span>
+            </a>
+          </div>
+
+          <div class="feature-detail" id="capture">
+            <div class="feature-detail__copy reveal">
+              <span class="section-kicker">01 / CAPTURE</span>
+              <h2>把词放回它出现的地方。</h2>
+              <p>
+                一个词真正的意思，藏在它出现的地方。SeeEnglish 把例句、关联词和你的中文联想放在一起，
+                让复习时的每一次回想，都有线索可以回去。
+              </p>
+              <ul class="feature-list">
+                <li><span>01</span> 复数、过去式、不规则形态自动匹配</li>
+                <li><span>02</span> 已存在的词只会补充，不会重复建索引</li>
+                <li><span>03</span> 例句、关联词、联想，一起保存</li>
+              </ul>
+            </div>
+            <div class="feature-visual feature-visual--capture reveal">
+              <div class="mini-search">
+                <svg class="icon icon--small"><use href="#i-search"></use></svg>
+                <span>apples</span>
+                <b>→ apple</b>
+              </div>
+              <div class="mini-word">
+                <span class="mini-word__meta">INDEX #001</span>
+                <strong>apple</strong>
+                <span class="mini-word__forms">apples · apples</span>
+                <p>苹果。也可以指珍视的人。</p>
+                <blockquote>“She kept an apple in her bag for the walk home.”</blockquote>
+                <div class="mini-word__chips"><span>fruit</span><span>Newton</span><span>the apple of my eye</span></div>
+              </div>
+              <span class="feature-visual__label">ONE WORD, ONE PLACE</span>
+            </div>
+          </div>
+
+          <div class="feature-detail feature-detail--reverse" id="recall">
+            <div class="feature-detail__copy reveal">
+              <span class="section-kicker">02 / RECALL</span>
+              <h2>复习不是被安排，<br /><em>是想起来。</em></h2>
+              <p>
+                没有每日任务，也没有“今天还有 30 个词”的倒计时。打开复习，随机遇见一个词，
+                先写下你记得的，再翻开记录，由你自己判断这一次有没有想起来。
+              </p>
+              <ul class="feature-list">
+                <li><span>01</span> 加权随机抽词，熟悉的词自然出现得更少</li>
+                <li><span>02</span> 先回想，再翻开，不把答案提前交给你</li>
+                <li><span>03</span> 每 5 次结算一档，一个词最多贡献 0.05 分</li>
+              </ul>
+            </div>
+            <div class="score-instrument reveal">
+              <div class="score-instrument__top">
+                <span class="section-kicker">LIBRARY SCORE</span>
+                <span class="score-instrument__level">有了轮廓</span>
+              </div>
+              <div class="score-instrument__number">42.680</div>
+              <div class="score-instrument__scale"><span>0</span><span>100 · CET-4</span></div>
+              <div class="score-instrument__track"><span></span></div>
+              <div class="score-instrument__meta">
+                <div><span>已收录</span><b>126</b></div>
+                <div><span>已结算</span><b>1,842</b></div>
+                <div><span>已归档</span><b>38</b></div>
+              </div>
+              <div class="score-instrument__quote">“把波动交给时间，把判断留给自己。”</div>
+            </div>
+          </div>
+
+          <div class="feature-detail feature-detail--library" id="library">
+            <div class="feature-detail__copy reveal">
+              <span class="section-kicker">03 / LIBRARY</span>
+              <h2>笔记会长大，<br /><em>也需要被整理。</em></h2>
+              <p>
+                词库不是一个展示列表，而是你随时可以修改的索引。列表和 A–Z 栅格两种浏览方式，
+                按归档状态筛选，点开一个词或一句话，修改、归档、删除；也可以建立多个互不干扰的词库，
+                把当前这一本导出成文件，或把旧备份合并回来。
+              </p>
+              <ul class="feature-list">
+                <li><span>01</span> 列表 / A–Z 栅格，首字母纵向分组，从 A 滚到 Z</li>
+                <li><span>02</span> 单词和句子都可以单独修改、删除</li>
+                <li><span>03</span> 多词库：默认词库始终保留，每个词库有独立的词、句和分数</li>
+                <li><span>04</span> 导出 / 导入当前词库的完整 JSON，复习和归档状态都在里面</li>
+              </ul>
+            </div>
+            <div class="index-panel glass reveal">
+              <div class="index-panel__top">
+                <div class="segmented" id="library-tabs" role="tablist" aria-label="词库视图">
+                  <button type="button" role="tab" aria-selected="true" class="is-active" data-view="words">
+                    单词 <span id="library-word-count">05</span>
+                  </button>
+                  <button type="button" role="tab" aria-selected="false" data-view="sentences">
+                    句子 <span id="library-sentence-count">05</span>
+                  </button>
+                </div>
+                <label class="library-search">
+                  <svg class="icon icon--small" aria-hidden="true"><use href="#i-search"></use></svg>
+                  <input id="library-query" type="search" placeholder="搜索词或句子…" aria-label="搜索词库预览" />
+                </label>
+              </div>
+              <div class="index-filter-row" aria-hidden="true">
+                <span class="index-filter-row__label">筛选</span>
+                <span class="index-filter is-active">全部</span>
+                <span class="index-filter">未归档</span>
+                <span class="index-filter">已归档</span>
+                <span class="index-filter-row__hint">点击单词展开详情</span>
+              </div>
+              <div id="library-content" class="index-content" aria-live="polite"></div>
+              <div class="index-panel__foot">
+                <span><i class="local-dot"></i> 演示数据 · 仅存在于当前页面</span>
+                <span id="library-updated">05 WORDS / 05 SENTENCES</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-detail feature-detail--profile" id="profile">
+            <div class="feature-detail__copy reveal">
+              <span class="section-kicker">04 / PROFILE</span>
+              <h2>看见变化，<br /><em>但不被变化催促。</em></h2>
+              <p>
+                个人中心不是排行榜。它只展示你的学习进度、最近 30 天的总分趋势，以及一些让界面更舒服的偏好。
+                头像、名字和签名都可以自己决定。
+              </p>
+              <ul class="feature-list">
+                <li><span>01</span> 学习进度：当前词库的总分、归档进度、见面和结算次数</li>
+                <li><span>02</span> 最近 30 天分数日趋势，跟着当前词库切换</li>
+                <li><span>03</span> 六种字色、界面动效、漂浮装饰，按自己的习惯来</li>
+                <li><span>04</span> 沉浸模式：让其他页面的标题退到背景里</li>
+              </ul>
+            </div>
+            <div class="profile-preview reveal">
+              <div class="profile-preview__card glass">
+                <div class="pp-avatar">
+                  <svg class="icon"><use href="#i-fingerprint"></use></svg>
+                  <span class="pp-avatar__edit"><svg class="icon icon--tiny"><use href="#i-pen"></use></svg></span>
+                </div>
+                <div class="pp-identity">
+                  <span>LOCAL ACCOUNT · 本地账户</span>
+                  <strong>SeeEnglish</strong>
+                  <p>A word after a word after a word is power.</p>
+                  <div class="pp-meta"><span>数据仅在本机</span><span>无需登录</span><span>本地 API</span></div>
+                </div>
+              </div>
+              <div class="pp-grid">
+                <div class="pp-progress glass">
+                  <span class="section-kicker">LEARNING PROGRESS</span>
+                  <strong>42.680</strong>
+                  <small>总掌握分 · 100 ≈ CET-4</small>
+                  <div class="pp-progress__track"><span></span></div>
+                  <div class="pp-progress__meta"><span>已归档 38 / 126</span><span>见面 1,842</span></div>
+                </div>
+                <div class="pp-chart glass">
+                  <div class="pp-chart__top"><span class="section-kicker">SCORE TREND · 30 DAYS</span><b>+0.164</b></div>
+                  <svg viewBox="0 0 300 80" role="img" aria-label="最近 30 天分数趋势">
+                    <line x1="0" y1="70" x2="300" y2="70" class="pp-chart__base"></line>
+                    <polyline class="pp-chart__line" points="0,68 22,69 44,64 66,65 88,60 110,62 132,55 154,57 176,50 198,48 220,41 242,37 264,31 286,28 300,24"></polyline>
+                    <circle cx="300" cy="24" r="3" class="pp-chart__dot"></circle>
+                  </svg>
+                  <div class="pp-chart__axis"><span>10.02</span><span>10.16</span><span>10.31</span></div>
+                </div>
+              </div>
+              <div class="pp-settings glass">
+                <div><span class="section-kicker">APPEARANCE</span><b>字色</b><span class="pp-setting-value">6 种 · 含雾粉 / 雾蓝 / 苔绿</span></div>
+                <div><span class="section-kicker">MOTION</span><b>界面动效</b><span class="pp-setting-value">标准</span></div>
+                <div><span class="section-kicker">IMMERSION</span><b>沉浸模式</b><span class="pp-setting-value">开启</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="local-first" id="local">
+            <div class="local-first__head reveal">
+              <span class="section-kicker">05 / LOCAL-FIRST</span>
+              <h2>你的笔记，只属于你的电脑。</h2>
+              <p>没有账号系统，没有云端同步，也没有付费解锁的词库额度。所有词库和内容都保存在本机的 SQLite 文件里。</p>
+            </div>
+            <div class="local-first__grid">
+              <div class="local-first__card glass reveal">
+                <svg class="icon"><use href="#i-database"></use></svg>
+                <h3>SQLite 本地存储</h3>
+                <p>词条、例句、复习记录和分数都在 <code>data/seeenglish.db</code>。</p>
+              </div>
+              <div class="local-first__card glass reveal">
+                <svg class="icon"><use href="#i-download"></use></svg>
+                <h3>JSON 导出 / 导入</h3>
+                <p>随时把当前词库带走，也能把一份旧备份合并回来。文件带版本号，导入前会检查格式。</p>
+              </div>
+              <div class="local-first__card glass reveal">
+                <svg class="icon"><use href="#i-shield"></use></svg>
+                <h3>没有账号，也不上传</h3>
+                <p>打开就能用，不注册，不登录，不把你的学习数据发到任何地方。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-section site-source site-docs" id="docs" data-section="docs">
+        <div class="source-shell">
+          <div class="section-kicker reveal">05 / DOCUMENTATION</div>
+          <h2 class="source-title reveal">
+            把用法和 API，<br />
+            都放在手边<span class="accent">。</span>
+          </h2>
+          <p class="source-copy reveal">
+            从第一次打开 SeeEnglish，到词库整理、复习节奏和本地 API，使用文档里都有完整说明。
+            遇到问题，也可以直接写信联系我们。
+          </p>
+
+          <div class="source-card glass reveal">
+            <div class="source-card__body">
+              <div class="source-card__badge">
+                <svg class="icon" aria-hidden="true"><use href="#i-file"></use></svg>
+                <span>DOCS / LOCAL API</span>
+              </div>
+              <h3>使用文档 &amp; API</h3>
+              <p>
+                安装与卸载、记词、复习、词库、数据备份，以及本地 API 的请求格式和示例。
+                面向普通用户，也面向想接自己工具的开发者。
+              </p>
+              <div class="source-actions">
+                <a class="button button--primary source-link" href="./docs.html">
+                  打开使用文档
+                  <svg class="icon icon--small" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                </a>
+                <a class="button button--ghost" href="mailto:we1258357219@163.com">
+                  <svg class="icon icon--small" aria-hidden="true"><use href="#i-user"></use></svg>
+                  联系我们
+                </a>
+              </div>
+            </div>
+            <div class="source-card__side">
+              <span class="source-card__label">START HERE</span>
+              <code>docs.html</code>
+              <span class="source-card__note">使用说明 · API · 常见问题</span>
+            </div>
+          </div>
+
+          <div class="source-stack reveal">
+            <div><span>01</span><p>Windows 10 / 11</p></div>
+            <div><span>02</span><p>SQLite · Local-first</p></div>
+            <div><span>03</span><p>无账号 · 无云端</p></div>
+            <div><span>04</span><p>导入 · 导出 · API</p></div>
+          </div>
+
+          <div class="source-philosophy reveal">
+            <p>“你学到什么，就记什么。<br />记了什么，就复习什么。”</p>
+            <span>— SeeEnglish</span>
+          </div>
+
+          <div class="source-return reveal">
+            <a href="#experience" class="text-link">再体验一次 <svg class="icon icon--small"><use href="#i-arrow-up-right"></use></svg></a>
+            <a href="#intro" class="text-link text-link--up">回到顶部 <svg class="icon icon--small"><use href="#i-arrow-down"></use></svg></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="official-footer">
+      <div class="official-footer__inner">
+        <div class="official-footer__brand">
+          <a class="brand" href="./index.html" aria-label="SeeEnglish 首页">
+            <span class="brand__mark brand__mark--small"><span class="brand__letter">S</span><span class="brand__dot"></span></span>
+            <span class="brand__copy">
+              <span class="brand__name">SeeEnglish</span>
+              <span class="brand__cn">见词 · 语言索引</span>
+            </span>
+          </a>
+          <p>一本不会催你的英语笔记。<br />本地优先，安静地记录你遇见的词。</p>
+        </div>
+        <div class="official-footer__columns">
+          <div>
+            <h3>产品</h3>
+            <a href="#intro">介绍</a>
+            <a href="./download.html">下载 Windows 版</a>
+            <a href="./docs.html">使用文档</a>
+          </div>
+          <div>
+            <h3>资源</h3>
+            <a href="./docs.html#install">快速开始</a>
+            <a href="./docs.html#api">API 文档</a>
+            <a href="./docs.html#faq">常见问题</a>
+          </div>
+          <div>
+            <h3>联系</h3>
+            <a href="mailto:we1258357219@163.com">we1258357219@163.com</a>
+            <a href="https://github.com/Yu-Sea" target="_blank" rel="noopener noreferrer">GitHub 主页</a>
+          </div>
+        </div>
+      </div>
+      <div class="official-footer__bottom">
+        <span>© 2026 SeeEnglish 见词</span>
+        <span>Local-first · No account · No cloud</span>
+      </div>
+    </footer>
+
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+
+    <noscript>
+      <div class="noscript-note">这个静态页面需要开启 JavaScript 才能体验交互演示。</div>
+    </noscript>
+
+    <script src="./app.js" defer></script>
+    <script src="./review-demo.js" defer></script>
+  </body>
+</html>

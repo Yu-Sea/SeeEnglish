@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="SeeEnglish 见词使用文档与本地 API 文档：安装、记词、复习、词库、数据备份和 API 接入。" />
+    <meta property="og:title" content="SeeEnglish 文档 · 使用说明与 API" />
+    <meta property="og:description" content="从第一次记词到本地 API 接入，SeeEnglish 的完整使用说明。" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="stylesheet" href="./base.css" />
+    <link rel="stylesheet" href="./official.css" />
+    <title>文档 · SeeEnglish 见词</title>
+  </head>
+  <body class="docs-page">
+    <header class="site-header docs-header is-scrolled">
+      <a class="brand" href="./index.html" aria-label="SeeEnglish 首页">
+        <span class="brand__mark">
+          <span class="brand__letter">S</span>
+          <span class="brand__dot"></span>
+        </span>
+        <span class="brand__copy">
+          <span class="brand__name">SeeEnglish</span>
+          <span class="brand__cn">见词 · 文档</span>
+        </span>
+      </a>
+      <div class="site-header__right">
+        <nav class="official-nav" aria-label="主导航">
+          <a href="./index.html#intro">介绍</a>
+          <a href="./download.html">下载</a>
+          <a class="is-active" href="./docs.html">文档</a>
+        </nav>
+        <a class="official-github" href="https://github.com/Yu-Sea" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.9-.39.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.73.81 1.17 1.83 1.17 3.09 0 4.41-2.69 5.39-5.25 5.67.41.35.77 1.04.77 2.11 0 1.52-.01 2.75-.01 3.13 0 .31.21.67.8.56C20.22 21.38 23.5 17.07 23.5 12 23.5 5.73 18.27.5 12 .5z"></path></svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="文档目录">
+        <p class="docs-sidebar__title">SeeEnglish Docs</p>
+
+        <div class="docs-nav-group">
+          <span>开始</span>
+          <a href="#overview" class="is-active">文档概览</a>
+          <a href="#install">安装</a>
+          <a href="#first-run">首次启动</a>
+          <a href="#uninstall">卸载与数据</a>
+        </div>
+
+        <div class="docs-nav-group">
+          <span>使用指南</span>
+          <a href="#capture">记词</a>
+          <a href="#review">复习</a>
+          <a href="#library">词库</a>
+          <a href="#profile">个人与设置</a>
+          <a href="#transfer">多词库与导入导出</a>
+        </div>
+
+        <div class="docs-nav-group">
+          <span>本地 API</span>
+          <a href="#api">API 概览</a>
+          <a href="#api-conventions">约定与错误</a>
+          <a href="#api-libraries">词库</a>
+          <a href="#api-words">词条与匹配</a>
+          <a href="#api-review">复习</a>
+          <a href="#api-transfer">导入 / 导出</a>
+          <a href="#api-profile">统计</a>
+        </div>
+
+        <div class="docs-nav-group">
+          <span>其他</span>
+          <a href="#faq">常见问题</a>
+          <a href="#contact">联系我们</a>
+        </div>
+      </aside>
+
+      <main class="docs-content">
+        <h1>SeeEnglish 文档</h1>
+        <p class="docs-lead">
+          从第一次打开，到把自己的工具接上本地 API。SeeEnglish 是一个本地优先的英语语言索引：
+          没有账号，没有每日任务，所有数据都保存在你的电脑里。
+        </p>
+
+        <section id="overview">
+          <h2>文档概览</h2>
+          <p>
+            SeeEnglish 由桌面程序和本地服务组成。桌面程序负责记词、复习、词库和个人页面；
+            本地 API 负责读写 SQLite 数据库。Web 页面和桌面端共用同一套数据，不需要同步。
+          </p>
+          <div class="docs-callout">
+            <strong>本地优先：</strong>默认只监听 <code>127.0.0.1</code>，没有账号系统，
+            学习内容不会上传到云端。API 默认不需要鉴权，请不要把本地端口直接暴露到公网。
+          </div>
+          <table class="docs-table">
+            <thead><tr><th>项目</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>桌面程序</td><td>Windows 10 / 11，当前用户安装，支持系统托盘保活</td></tr>
+              <tr><td>本地 API</td><td><code>http://127.0.0.1:8765/api</code></td></tr>
+              <tr><td>数据目录</td><td><code>%APPDATA%\SeeEnglish\seeenglish.db</code></td></tr>
+              <tr><td>当前版本</td><td>0.6.0</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="install">
+          <h2>安装</h2>
+          <p>在 <a href="./download.html">下载页</a> 下载 Windows 安装包，双击后按向导完成安装。</p>
+          <ul>
+            <li>安装到 <code>%LOCALAPPDATA%\Programs\SeeEnglish</code></li>
+            <li>当前用户安装，不需要管理员权限</li>
+            <li>默认创建桌面快捷方式和开始菜单入口</li>
+            <li>安装完成后可以直接启动，不需要另外安装 Python、Node.js 或浏览器扩展</li>
+          </ul>
+          <div class="docs-callout">
+            <strong>SmartScreen：</strong>安装包目前没有代码签名，Windows 可能提示“发布者未知”。
+            点击“更多信息 → 仍要运行”即可。安装包来自官网的正式下载地址。
+          </div>
+        </section>
+
+        <section id="first-run">
+          <h2>首次启动</h2>
+          <p>
+            双击桌面上的 SeeEnglish。窗口会立即显示预加载动画，同时启动本地 API；
+            准备完成后自动进入主界面。首次启动会在数据目录创建空白数据库和默认词库。
+          </p>
+          <p>
+            主界面左侧是记词、复习、词库、个人四个入口。你可以直接从“记词”开始，
+            也可以先在“词库”里看看默认词库。
+          </p>
+        </section>
+
+        <section id="uninstall">
+          <h2>卸载与数据</h2>
+          <p>可以在 Windows 设置的“应用”里卸载 SeeEnglish，也可以从开始菜单的 SeeEnglish 文件夹运行卸载程序。</p>
+          <p>卸载默认会删除：</p>
+          <ul>
+            <li>安装目录中的程序文件</li>
+            <li><code>%APPDATA%\SeeEnglish</code> 里的数据库、设置和日志</li>
+            <li><code>%LOCALAPPDATA%\SeeEnglish</code> 里的缓存</li>
+            <li>桌面、开始菜单快捷方式和卸载注册项</li>
+          </ul>
+          <div class="docs-callout">
+            <strong>没有“保留数据”选项。</strong>卸载即清空本地数据，操作不可恢复。
+            如果需要保留词库，请先在词库页导出 JSON 备份。
+          </div>
+        </section>
+
+        <section id="capture">
+          <h2>记词</h2>
+          <p>记词页是 SeeEnglish 的入口。输入一个单词，应用会尝试匹配词库里的已有词和词形变化，例如复数、过去式、现在分词和不规则形态。</p>
+          <h3>新建或补充</h3>
+          <ul>
+            <li>没有匹配时，可以把它作为新词条收录。</li>
+            <li>已有词条时，按钮会变成“补充到词条”，不会重复创建。</li>
+            <li>词条可以保存个人联想、例句和关联词。</li>
+          </ul>
+          <h3>关联词</h3>
+          <p>
+            关联是单向的：如果 <code>input</code> 关联了 <code>out</code>，在 <code>input</code> 里会看到 <code>out</code>，
+            但 <code>out</code> 不会自动出现 <code>input</code>。在词库展开词条后点击关联词，会跳到目标词并自动展开。
+          </p>
+        </section>
+
+        <section id="review">
+          <h2>复习</h2>
+          <p>复习没有每日任务，也没有强制性队列。进入复习页后，会随机遇到一个词：</p>
+          <ol>
+            <li>先写下你记得的意思、关键词或画面。</li>
+            <li>翻开记录，查看词库里的联想、例句和关联词。</li>
+            <li>自己判断“想起来了”或“还差一点”。</li>
+          </ol>
+          <p>
+            每个词每 5 次见面结算一次。每次结算后，词条贡献和词库总分才会更新；
+            复习结果页会显示当前贡献、本档进度和关联词。点击结果页里的关联词，会跳到词库里的目标词并展开。
+          </p>
+          <div class="docs-callout">
+            没有计时、没有连续打卡，也不会因为某天没复习而扣分。进度只记录你真实做过的复习。
+          </div>
+        </section>
+
+        <section id="library">
+          <h2>词库</h2>
+          <p>词库页支持 A–Z 栅格和列表两种浏览方式，可以按“全部 / 未归档 / 已归档”筛选，也可以搜索单词、联想和关联词。</p>
+          <h3>词条操作</h3>
+          <ul>
+            <li>展开词条查看个人联想、例句和关联词。</li>
+            <li>点击“修改”编辑单词、联想、例句和关联词。</li>
+            <li>归档后不再参与复习，但仍保留在词库中；可以取消归档。</li>
+            <li>删除会同时移除该词的复习记录和分数贡献。</li>
+          </ul>
+          <h3>句子视图</h3>
+          <p>切换到“句子”可以单独浏览所有例句，并直接修改或删除某一句。修改句子不会影响词条的其他内容。</p>
+        </section>
+
+        <section id="profile">
+          <h2>个人与设置</h2>
+          <p>个人页面显示当前词库的总掌握分、最近 30 天趋势、见面次数和结算次数。所有统计都基于当前选中的词库。</p>
+          <h3>外观与偏好</h3>
+          <ul>
+            <li>字色、界面动效和背景装饰可以按喜好调整。</li>
+            <li>沉浸模式会隐藏页头和标题，把空间留给卡片和内容。</li>
+            <li>关闭窗口时可以选择每次询问、最小化到托盘或直接退出。</li>
+          </ul>
+          <h3>系统托盘</h3>
+          <p>
+            选择“最小化到托盘”后，点击窗口关闭按钮会隐藏窗口，程序继续在后台运行，本地 API 和词库仍然在线。
+            托盘菜单可以重新打开主界面、修改关闭行为或退出程序。
+          </p>
+        </section>
+
+        <section id="transfer">
+          <h2>多词库与导入导出</h2>
+          <p>词库页右上角的“选择词库”可以创建、编辑、切换和删除词库。默认词库不能删除。每个词库有独立的词条和复习进度。</p>
+          <h3>导出</h3>
+          <p>导出会生成一个 JSON 文件，包含当前词库的词条、联想、例句、关联关系和复习状态。建议在换电脑或卸载前导出。</p>
+          <h3>导入</h3>
+          <p>导入会把 JSON 合并到当前词库：已存在的同名词条会合并，不会重复创建。导入前建议先导出一份当前词库作为备份。</p>
+        </section>
+
+        <section id="api">
+          <h2>本地 API</h2>
+          <p>
+            SeeEnglish 的桌面程序启动时会在本机运行一个 FastAPI 服务。API 和 Web 页面、桌面端共用同一份 SQLite 数据，
+            可以用来做自己的脚本、编辑器插件或自动化工具。
+          </p>
+          <table class="docs-table">
+            <thead><tr><th>项目</th><th>值</th></tr></thead>
+            <tbody>
+              <tr><td>Base URL</td><td><code>http://127.0.0.1:8765/api</code></td></tr>
+              <tr><td>数据格式</td><td>JSON（请求和响应）</td></tr>
+              <tr><td>鉴权</td><td>无；仅限本机访问</td></tr>
+              <tr><td>CORS</td><td>允许 <code>localhost</code> / <code>127.0.0.1</code> 来源</td></tr>
+              <tr><td>API 文档</td><td><code>http://127.0.0.1:8765/docs</code>（Swagger UI）</td></tr>
+            </tbody>
+          </table>
+          <p>先确认本地服务正在运行：</p>
+          <pre><code>curl http://127.0.0.1:8765/api/health
+
+# PowerShell
+Invoke-RestMethod http://127.0.0.1:8765/api/health</code></pre>
+          <p>正常响应：</p>
+          <pre><code>{
+  "status": "ok",
+  "service": "seeenglish",
+  "version": "0.6.0"
+}</code></pre>
+        </section>
+
+        <section id="api-conventions">
+          <h2>约定与错误</h2>
+          <p>所有写操作使用 JSON 请求体，并设置 <code>Content-Type: application/json</code>。词库通过查询参数 <code>library_id</code> 指定，默认是 1。</p>
+          <p>错误响应会带 HTTP 状态码和 JSON detail：</p>
+          <pre><code>{
+  "detail": {
+    "code": "duplicate_word",
+    "message": "这个词已经在词库里。",
+    "entry_id": 12
+  }
+}</code></pre>
+          <table class="docs-table">
+            <thead><tr><th>状态码</th><th>含义</th></tr></thead>
+            <tbody>
+              <tr><td>200 / 201</td><td>成功</td></tr>
+              <tr><td>404</td><td>词库或词条不存在</td></tr>
+              <tr><td>409</td><td>重复词条、已归档等冲突</td></tr>
+              <tr><td>422</td><td>请求字段不合法</td></tr>
+              <tr><td>503</td><td>本地服务暂时不可用</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="api-libraries">
+          <h2>词库 API</h2>
+          <table class="docs-table">
+            <thead><tr><th>方法</th><th>路径</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>GET</td><td><code>/api/libraries</code></td><td>列出所有词库</td></tr>
+              <tr><td>POST</td><td><code>/api/libraries</code></td><td>新建词库</td></tr>
+              <tr><td>PATCH</td><td><code>/api/libraries/{id}</code></td><td>修改名称或分组</td></tr>
+              <tr><td>DELETE</td><td><code>/api/libraries/{id}</code></td><td>删除非默认词库</td></tr>
+            </tbody>
+          </table>
+          <pre><code>curl -X POST http://127.0.0.1:8765/api/libraries \
+  -H "Content-Type: application/json" \
+  -d '{"name":"阅读记录","group_name":"学习"}'</code></pre>
+        </section>
+
+        <section id="api-words">
+          <h2>词条与匹配 API</h2>
+          <table class="docs-table">
+            <thead><tr><th>方法</th><th>路径</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>GET</td><td><code>/api/words?library_id=1&amp;q=&amp;limit=100</code></td><td>列出词条，可按关键词筛选</td></tr>
+              <tr><td>GET</td><td><code>/api/words/match?q=apples&amp;library_id=1</code></td><td>词形与模糊匹配</td></tr>
+              <tr><td>POST</td><td><code>/api/words?library_id=1</code></td><td>新建词条</td></tr>
+              <tr><td>POST</td><td><code>/api/words/{id}/supplement</code></td><td>补充已有词条</td></tr>
+              <tr><td>PATCH</td><td><code>/api/words/{id}</code></td><td>修改词条</td></tr>
+              <tr><td>DELETE</td><td><code>/api/words/{id}</code></td><td>删除词条</td></tr>
+              <tr><td>POST</td><td><code>/api/words/{id}/archive</code></td><td>归档词条</td></tr>
+              <tr><td>POST</td><td><code>/api/words/{id}/unarchive</code></td><td>取消归档</td></tr>
+            </tbody>
+          </table>
+          <p>新建词条：</p>
+          <pre><code>curl -X POST "http://127.0.0.1:8765/api/words?library_id=1" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "word": "serendipity",
+    "note": "意外发现美好事物的能力",
+    "sentence": "It was pure serendipity.",
+    "related_ids": []
+  }'</code></pre>
+          <p>补充已有词条（保留原有内容，只补充提供的字段）：</p>
+          <pre><code>curl -X POST "http://127.0.0.1:8765/api/words/12/supplement" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "note": "在旧书店遇到的一本书",
+    "sentence": "A moment of serendipity.",
+    "related_ids": [3, 8]
+  }'</code></pre>
+        </section>
+
+        <section id="api-review">
+          <h2>复习 API</h2>
+          <table class="docs-table">
+            <thead><tr><th>方法</th><th>路径</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>GET</td><td><code>/api/review/overview?library_id=1</code></td><td>当前词库的分数、进度、趋势</td></tr>
+              <tr><td>GET</td><td><code>/api/review/next?library_id=1&amp;exclude_id=12</code></td><td>随机取下一个复习词</td></tr>
+              <tr><td>POST</td><td><code>/api/review/{entry_id}?library_id=1</code></td><td>提交一次复习结果</td></tr>
+            </tbody>
+          </table>
+          <pre><code>curl -X POST "http://127.0.0.1:8765/api/review/12?library_id=1" \
+  -H "Content-Type: application/json" \
+  -d '{"result":"correct","answer":"意外的发现"}'</code></pre>
+          <p><code>result</code> 只接受 <code>correct</code> 或 <code>incorrect</code>。每 5 次复习结算一次，响应里会包含更新后的词条、本次结果和总览。</p>
+        </section>
+
+        <section id="api-transfer">
+          <h2>导入 / 导出 API</h2>
+          <table class="docs-table">
+            <thead><tr><th>方法</th><th>路径</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>GET</td><td><code>/api/export?library_id=1</code></td><td>导出词库 JSON 附件</td></tr>
+              <tr><td>POST</td><td><code>/api/import?library_id=1</code></td><td>合并导入词库 JSON</td></tr>
+            </tbody>
+          </table>
+          <pre><code>curl -L "http://127.0.0.1:8765/api/export?library_id=1" -o library.json
+curl -X POST "http://127.0.0.1:8765/api/import?library_id=1" \
+  -H "Content-Type: application/json" \
+  --data-binary "@library.json"</code></pre>
+        </section>
+
+        <section id="api-profile">
+          <h2>个人统计 API</h2>
+          <table class="docs-table">
+            <thead><tr><th>方法</th><th>路径</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>GET</td><td><code>/api/profile?library_id=1</code></td><td>总览、统计和最近 30 天分数序列</td></tr>
+              <tr><td>GET</td><td><code>/api/stats?library_id=1</code></td><td>当前词库的计数摘要</td></tr>
+            </tbody>
+          </table>
+          <p>这些接口适合做自己的学习面板、编辑器插件或自动化脚本。</p>
+        </section>
+
+        <section id="faq">
+          <h2>常见问题</h2>
+          <h3>数据在哪里？</h3>
+          <p>默认在 <code>%APPDATA%\SeeEnglish\seeenglish.db</code>。卸载会删除这个目录，需要保留时请先导出。</p>
+          <h3>Web 和桌面端的数据是分开的吗？</h3>
+          <p>不是。它们共用同一个本地 API 和同一个 SQLite 数据库。桌面端写入后，Web 刷新即可看到。</p>
+          <h3>为什么关闭窗口后程序还在？</h3>
+          <p>如果你选择“最小化到托盘”，程序会继续在系统托盘运行，本地 API 也会保持可用。需要彻底退出时，请使用托盘菜单里的“退出程序”。</p>
+          <h3>端口 8765 被占用怎么办？</h3>
+          <p>开发环境可以用 <code>app.py --port 8766</code> 换端口；安装版的端口由桌面程序管理，确认没有重复启动即可。</p>
+          <h3>API 能开放到局域网或公网吗？</h3>
+          <p>默认只绑定 <code>127.0.0.1</code>，没有鉴权，不建议直接暴露到公网。如果确实需要，请自行加反向代理、鉴权和 HTTPS。</p>
+        </section>
+
+        <section id="contact">
+          <h2>联系我们</h2>
+          <p>使用、安装或 API 接入遇到问题，欢迎发邮件：</p>
+          <p><a href="mailto:we1258357219@163.com">we1258357219@163.com</a></p>
+          <p>也可以在 <a href="https://github.com/Yu-Sea" target="_blank" rel="noopener noreferrer">GitHub</a> 查看项目动态。</p>
+          <div class="docs-footer">
+            <span>SeeEnglish 见词 · 文档 · 2026</span><br />
+            <a href="./index.html">返回官网</a> · <a href="./download.html">下载 Windows 版</a> · <a href="mailto:we1258357219@163.com">联系邮箱</a>
+          </div>
+        </section>
+      </main>
+
+      <aside class="docs-toc" aria-label="本页目录">
+        <h3>本页目录</h3>
+        <a href="#overview">文档概览</a>
+        <a href="#install">安装</a>
+        <a href="#first-run">首次启动</a>
+        <a href="#uninstall">卸载与数据</a>
+        <a href="#capture">记词</a>
+        <a href="#review">复习</a>
+        <a href="#library">词库</a>
+        <a href="#profile">个人与设置</a>
+        <a href="#transfer">导入导出</a>
+        <a href="#api">API 概览</a>
+        <a href="#api-conventions">约定与错误</a>
+        <a href="#api-libraries">词库 API</a>
+        <a href="#api-words">词条 API</a>
+        <a href="#api-review">复习 API</a>
+        <a href="#api-transfer">导入导出 API</a>
+        <a href="#api-profile">统计 API</a>
+        <a href="#faq">常见问题</a>
+        <a href="#contact">联系我们</a>
+      </aside>
+    </div>
+  </body>
+</html>
