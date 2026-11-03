@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SeeEnglish</title>
+    <style>
+      :root {
+        --ink: #07182c;
+        --blue: #2f6fed;
+        --soft: #6f8fac;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #eaf5ff;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        font-family: "Manrope", "Microsoft YaHei", "PingFang SC", sans-serif;
+        color: var(--ink);
+      }
+
+      .splash {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 50% 42%, rgba(255, 255, 255, 0.94) 0%, rgba(238, 247, 255, 0.7) 36%, transparent 68%),
+          linear-gradient(128deg, #f7fbff 0%, #e8f3ff 48%, #d8eaff 100%);
+        transition: opacity 0.62s ease, filter 0.62s ease, background-color 0.62s ease;
+      }
+
+      .splash::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(98, 143, 188, 0.075) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(98, 143, 188, 0.075) 1px, transparent 1px);
+        background-size: 96px 96px;
+        mask-image: radial-gradient(ellipse at center, black 0%, transparent 78%);
+      }
+
+      .splash.is-leaving {
+        filter: brightness(0.72);
+      }
+
+      .splash__veil {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        background: #04101f;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.62s ease;
+      }
+
+      .splash.is-leaving .splash__veil {
+        opacity: 0.62;
+      }
+
+      .splash.is-leaving .splash__inner,
+      .splash.is-leaving .word,
+      .splash.is-leaving .dot {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .splash__inner {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        justify-items: center;
+        transform: translateY(-3vh);
+      }
+
+      .logo {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 116px;
+        height: 116px;
+        border-radius: 30px;
+        background: var(--ink);
+        box-shadow:
+          0 26px 60px rgba(13, 45, 84, 0.19),
+          0 0 0 11px rgba(255, 255, 255, 0.4);
+        animation: logo-float 3.6s ease-in-out infinite;
+      }
+
+      .logo::after {
+        content: "";
+        position: absolute;
+        right: 9px;
+        bottom: 9px;
+        width: 19px;
+        height: 19px;
+        border-radius: 50%;
+        background: #79b6ff;
+        border: 4px solid var(--ink);
+      }
+
+      .logo span {
+        color: #fff;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 76px;
+        font-style: italic;
+        line-height: 1;
+        transform: translate(-2px, -1px);
+      }
+
+      .name {
+        margin-top: 28px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 30px;
+        letter-spacing: -0.02em;
+      }
+
+      .kicker {
+        margin-top: 8px;
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 650;
+        letter-spacing: 0.18em;
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 62px;
+        color: var(--soft);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        transition: color 0.3s ease;
+      }
+
+      .status.is-ready {
+        color: var(--blue);
+      }
+
+      .status__line {
+        position: relative;
+        width: 86px;
+        height: 2px;
+        overflow: hidden;
+        border-radius: 99px;
+        background: rgba(74, 119, 166, 0.16);
+      }
+
+      .status__line::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -46%;
+        width: 46%;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--blue);
+        animation: scan 1.45s ease-in-out infinite;
+      }
+
+      .credit {
+        position: absolute;
+        right: 20px;
+        bottom: 16px;
+        z-index: 2;
+        display: inline-flex;
+        align-items: baseline;
+        gap: 5px;
+        color: rgba(58, 91, 126, 0.48);
+        font-size: 9px;
+        letter-spacing: 0.03em;
+      }
+
+      .credit b {
+        color: rgba(47, 111, 237, 0.68);
+        font-weight: 650;
+      }
+
+      .word {
+        position: absolute;
+        z-index: 1;
+        color: rgba(76, 120, 163, 0.28);
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+        white-space: nowrap;
+        animation: drift 7s ease-in-out infinite;
+        user-select: none;
+      }
+
+      .word--serendipity { top: 18%; left: 9%; font-size: 22px; animation-delay: -2.2s; }
+      .word--ephemeral { top: 24%; right: 10%; font-size: 18px; animation-delay: -4.4s; }
+      .word--wander { top: 51%; left: 16%; font-size: 16px; animation-delay: -1.3s; }
+      .word--lucid { top: 62%; right: 17%; font-size: 20px; animation-delay: -3.5s; }
+      .word--index { bottom: 15%; left: 24%; font-size: 13px; letter-spacing: 0.16em; font-style: normal; animation-delay: -5.1s; }
+      .word--quiet { bottom: 21%; right: 22%; font-size: 14px; animation-delay: -0.8s; }
+      .word--remember { top: 12%; right: 30%; font-size: 11px; letter-spacing: 0.12em; font-style: normal; animation-delay: -6s; }
+
+      .dot {
+        position: absolute;
+        z-index: 1;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(47, 111, 237, 0.22);
+      }
+
+      .dot--one { top: 31%; left: 29%; animation: pulse 3.2s ease-in-out infinite; }
+      .dot--two { bottom: 30%; right: 30%; animation: pulse 3.2s 1.1s ease-in-out infinite; }
+      .dot--three { top: 66%; left: 9%; animation: pulse 3.2s 0.6s ease-in-out infinite; }
+
+      .error {
+        position: absolute;
+        bottom: 8%;
+        max-width: 440px;
+        padding: 12px 16px;
+        border: 1px solid rgba(164, 94, 45, 0.2);
+        border-radius: 10px;
+        background: rgba(255, 248, 238, 0.86);
+        color: #8d5b2e;
+        font-size: 12px;
+        line-height: 1.6;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .error.is-visible { opacity: 1; transform: translateY(0); }
+
+      @keyframes logo-float {
+        0%, 100% { transform: translateY(0) rotate(-0.2deg); }
+        50% { transform: translateY(-8px) rotate(0.2deg); }
+      }
+
+      @keyframes drift {
+        0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.8; }
+        50% { transform: translate3d(0, -9px, 0); opacity: 1; }
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(0.7); opacity: 0.35; }
+        50% { transform: scale(1.15); opacity: 0.9; }
+      }
+
+      @keyframes scan {
+        0% { left: -46%; }
+        100% { left: 100%; }
+      }
+
+      @media (max-width: 760px) {
+        .word--serendipity { left: 4%; font-size: 17px; }
+        .word--ephemeral { right: 4%; font-size: 14px; }
+        .word--lucid { right: 8%; }
+        .word--index { left: 12%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="splash" id="splash">
+      <div class="splash__veil"></div>
+      <span class="word word--serendipity">serendipity</span>
+      <span class="word word--ephemeral">ephemeral</span>
+      <span class="word word--wander">wander</span>
+      <span class="word word--lucid">lucid</span>
+      <span class="word word--index">INDEX</span>
+      <span class="word word--quiet">quiet</span>
+      <span class="word word--remember">A WORD AT A TIME</span>
+      <span class="dot dot--one"></span>
+      <span class="dot dot--two"></span>
+      <span class="dot dot--three"></span>
+
+      <section class="splash__inner">
+        <div class="logo" aria-label="SeeEnglish"><span>S</span></div>
+        <div class="name">SeeEnglish</div>
+        <div class="kicker">见 词  ·  LOCAL INDEX</div>
+        <div class="status">
+          <span>正在整理你的语言索引</span>
+          <span class="status__line"></span>
+        </div>
+      </section>
+
+      <div class="error" id="error" role="alert"></div>
+      <div class="credit"><span>美术支持</span><b>@xxxx（B站）</b></div>
+    </main>
+
+    <script>
+      window.setSplashReady = () => {
+        const status = document.querySelector('.status');
+        const label = status?.querySelector('span:first-child');
+        if (label) label.textContent = '即将进入你的索引';
+        status?.classList.add('is-ready');
+      };
+
+      window.finishSplash = () => {
+        document.getElementById('splash').classList.add('is-leaving');
+      };
+
+      window.showSplashError = (message) => {
+        const node = document.getElementById('error');
+        node.textContent = message;
+        node.classList.add('is-visible');
+      };
+    </script>
+  </body>
+</html>

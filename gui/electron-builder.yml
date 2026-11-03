@@ -1,0 +1,40 @@
+appId: com.seeenglish.desktop
+productName: SeeEnglish
+copyright: Copyright © 2026 SeeEnglish
+electronDist: node_modules/electron/dist
+electronVersion: 45.2.1
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**
+  - electron/**
+  - package.json
+extraResources:
+  - from: ../packaging/dist/SeeEnglishBackend
+    to: backend
+  - from: dist
+    to: gui
+  - from: ../web/dist
+    to: web
+  - from: electron/tray.png
+    to: tray.png
+asar: true
+compression: normal
+npmRebuild: false
+win:
+  icon: ../assets/seeenglish.ico
+  target:
+    - nsis
+  artifactName: SeeEnglish-Setup-${version}.${ext}
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  runAfterFinish: true
+  deleteAppDataOnUninstall: true
+  installerIcon: ../assets/seeenglish.ico
+  uninstallerIcon: ../assets/seeenglish.ico
+  installerHeaderIcon: ../assets/seeenglish.ico

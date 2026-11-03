@@ -1,0 +1,49 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local data / runtime
+_local/
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/*.log
+data/*.pid
+data/backups/
+data/browser-profile*/
+data/default-browser.txt
+
+# Frontend
+web/node_modules/
+web/dist/
+web/.vite/
+gui/node_modules/
+gui/dist/
+gui/release/
+*.tsbuildinfo
+
+# Packaging build outputs
+packaging/build/
+packaging/dist/
+packaging/temp/
+packaging/test-data/
+packaging/electron-test/
+packaging/*.log
+packaging/installer-assets/*-preview.png
+
+# Tooling / OS
+.DS_Store
+Thumbs.db
+*.log
+.chrome-profile/
+.chrome-profile*/
+screens-*/
+.tmp/
+.pip-cache/
+_shot-*.png
+_landing-*.png
+.tools/
+.npm-cache/
+SeeEnglish-static-site.zip
